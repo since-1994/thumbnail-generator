@@ -1,2 +1,30 @@
-.colors div {
+.pallette {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8em;
+  width: 100%;
+}
+.pallette > * {
+  margin: 1em 0;
+}
+.colors {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.color {
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.text {
+  width: 100%;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+  color: black;
 }
