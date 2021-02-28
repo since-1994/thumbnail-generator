@@ -13,7 +13,7 @@ function App({colors}) {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0,0,640,360);
     ctx.textAlign = 'center';
-    ctx.font = "38px Arial";
+    ctx.font = "38px Do Hyeon";
     ctx.fillStyle = color;
     ctx.fillRect(0,0,640,360);
     ctx.fillStyle = 'black';

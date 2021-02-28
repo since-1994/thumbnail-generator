@@ -1,5 +1,11 @@
 # thumnail generator
 
+## what i build
+
+###
+
+<image src="./images/image1.png" />
+
 ## what i solved
 
 ### 1. color를 props를 받아서 적용시키기
