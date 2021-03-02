@@ -50,3 +50,52 @@ ctx.textBaseline= 'middle';
 ctx.fillStyle = 'black';
 ctx.fillText(<text>, <x>, <y>);
 ```
+
+### 3. image 입력 받아와 canvas의 배경으로 표시하기
+
+<image src="./images/uploadImage.png" />
+canvas위에 image를 그리기 위해서 `ctx.drawImage()`를 사용했는데요. drawImage에 전달할 인자로 그리고자 하는 image를 src로 갖고 있는 image element가 필요합니다. image element를 생성해주는 방법도 좋지만 탬플릿에 `display: none`인 image element를 미리 넣어놓고 이용했습니다.
+
+```javascript
+const Pallette = ({ colors, onChangeText, onSelectColor }) => {
+  const imageRef = useRef();
+
+  const updateImage = (e) => {
+    imageRef.current.src = URL.createObjectURL(imageRef.current.files[0]);
+    ctx.drawImage(imageRef.current, 0, 0);
+  };
+
+  return (
+    <section>
+      <input ref={imageRef} type="file" onChange={updateImage} />
+    </section>
+  );
+};
+```
+
+그런데 위처럼 하면 canvas에 이미지가 표시되지 않습니다. image가 로드가 채 되기 전에 받아오기 때문인데요. 이 문제를 해결하기 위해 image element에 `load` eventListener를 달아주어 해결했습니다.
+
+```javascript
+const Pallette = ({ colors, onChangeText, onSelectColor }) => {
+  const imageRef = useRef();
+
+  const updateImage = (e) => {
+    imageRef.current.src = URL.createObjectURL(imageRef.current.files[0]);
+  };
+
+  const drawImage = () => {
+    ctx.drawImage(imageRef.current, 0, 0);
+  };
+
+  return (
+    <section>
+      <input
+        ref={imageRef}
+        type="file"
+        onChange={updateImage}
+        onLoad={drawImage}
+      />
+    </section>
+  );
+};
+```

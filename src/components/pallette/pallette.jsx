@@ -1,11 +1,16 @@
 import React, { useRef } from 'react';
 import styles from './pallette.module.css';
 
-const Pallette = ({colors, onChangeText, onSelectColor}) => {
-    const inputRef = useRef();
+const Pallette = ({colors, onChangeText, onSelectColor, onSelectImage}) => {
+    const textRef = useRef();
+    const imageRef = useRef();
 
     const updateText = e => {
-        onChangeText(inputRef.current.value);
+        onChangeText(textRef.current.value);
+    }
+
+    const updateImage = e => {
+        onSelectImage(URL.createObjectURL(imageRef.current.files[0]));
     }
 
     return (
@@ -15,8 +20,8 @@ const Pallette = ({colors, onChangeText, onSelectColor}) => {
                     colors.map(color => <div className={`${styles.color} color-selector`} color={color} onClick={onSelectColor}></div>)
                 }
             </div>
-            <input ref = {inputRef} className={styles.text} type="text" onChange={updateText}/>
-            <input className={styles.file} type="file"/>
+            <input ref = {textRef} className={styles.text} type="text" onChange={updateText}/>
+            <input ref = {imageRef} className={styles.file} type="file" onChange={updateImage}/>
         </section>
     );
 }
