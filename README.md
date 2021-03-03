@@ -99,3 +99,26 @@ const Pallette = ({ colors, onChangeText, onSelectColor }) => {
   );
 };
 ```
+
+### 4. 16:9의 비율로 업로드한 이미지 잘라주기
+
+업로드한 이미지를 생성할 Thumbnail의 비율에 맞게 잘라주기 위한 기능을 추가하는데 자르는 기준이 되는 박스가 아래와 같이 이미지를 벗어나면 결과가 잘리는 문제가 발생하였습니다.
+
+## <image src="./images/image2.png" width="80%"/>
+
+이 문제를 해결하기 위한 방법으로 기준이 되는 박스를 아래와 같이 아예 이미지 밖을 나가지 못하도록 수정해보았습니다.
+
+```javascript
+if (left < 0) {
+  left = 0;
+}
+if (top < 0) {
+  top = 0;
+}
+if (top + h > canvasRef.current.height) {
+  top = canvasRef.current.height - h;
+}
+if (left + w > canvasRef.current.width) {
+  left = canvasRef.current.width - w;
+}
+```
